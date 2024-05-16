@@ -11,12 +11,13 @@ def count(text):
 
 def complexity(text):
     words = re.findall(r'\b\w+\b', text)
-    # return total words over 8
-    return sum(1 for word in words if len(word) > 8)
+    # return proportion of words over len 8 out of 5
+    return ((sum(1 for word in words if len(word) > 8) / len(words)) * 5)
 
 @app.route('/read', methods=['POST'])
 def read_you():
     data = request.json
+    print(data)
     if 'text' not in data:
         return jsonify({'error': 'Text field is missing'}), 400
 
@@ -28,10 +29,10 @@ def read_you():
     res = {
         'count' : wc,
         'time_minutes' : ttr,
-        'complexity' : cpx
+        'complexity' : f"{cpx}/5"
     }
 
     return jsonify(res), 200
 
-if __name_ == '__main__':
+if __name__ == '__main__':
     app.run(debug=True)
