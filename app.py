@@ -36,3 +36,4 @@ def read_you():
 
 if __name__ == '__main__':
     app.run(debug=True)
+    #add port=##### to change the port the api uses
